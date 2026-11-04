@@ -4,6 +4,7 @@
       - car_to.launch：启动入口，加载Gazebo场景、小车urdf模型、激光雷达、相机，发布TF、odom，整套仿真的基础启动文件
     - scripts
       - move_obstacle.py：动态障碍物控制脚本，向Gazebo障碍物发送位姿指令，生成移动障碍物，用于动态避障测试，负责移动动态障碍物
+      - lianxi_gazebo/scripts/nav_mon.py   该节点订阅导航、定位相关话题，采集小车位姿、协方差与导航状态信息并写入CSV日志，用于导航实验的数据记录与效果分析。
     - urdf
       - camera.urdf.xacro：相机xacro模型，定义相机连杆、传感器参数、安装位置，仿真输出图像话题
       - car_base.urdf.xacro：小车底盘本体模型，定义底盘连杆、车轮、惯性与碰撞属性，机器人基础骨架
