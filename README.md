@@ -3,7 +3,7 @@
     - launch
       - car_to.launch：启动入口，加载Gazebo场景、小车urdf模型、激光雷达、相机，发布TF、odom，整套仿真的基础启动文件
     - scripts
-      - move_obstacle.py：动态障碍物控制脚本，向Gazebo障碍物发送位姿指令，生成移动障碍物，用于动态避障测试
+      - move_obstacle.py：动态障碍物控制脚本，向Gazebo障碍物发送位姿指令，生成移动障碍物，用于动态避障测试，负责移动动态障碍物
     - urdf
       - camera.urdf.xacro：相机xacro模型，定义相机连杆、传感器参数、安装位置，仿真输出图像话题
       - car_base.urdf.xacro：小车底盘本体模型，定义底盘连杆、车轮、惯性与碰撞属性，机器人基础骨架
@@ -22,4 +22,4 @@
     - src1
       - obs_auto.cpp：障碍物处理C++源码，实现障碍物识别、跟踪相关逻辑，服务动态避障
     - world
-      - box_house.world：Gazebo仿真场景文件，定义墙体、障碍物布局，搭建仿真环境
+      - box_house.world：Gazebo仿真场景文件，定义墙体、障碍物布局，搭建仿真环境，移动障碍物在这里生成，但不移动
