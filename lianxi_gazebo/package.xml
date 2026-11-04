@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<package format="2">
+  <name>lianxi_gazebo</name>
+  <version>0.0.0</version>
+  <description>Gazebo practice package for a simple car robot with camera and laser.</description>
+
+  <maintainer email="you@example.com">your_name</maintainer>
+  <license>TODO</license>
+
+  <buildtool_depend>catkin</buildtool_depend>
+
+  <depend>gazebo_ros</depend>
+  <depend>robot_state_publisher</depend>
+  <depend>urdf</depend>
+  <depend>xacro</depend>
+
+  <export>
+    <gazebo_ros gazebo_model_path="${prefix}/models"/>
+  </export>
+</package>

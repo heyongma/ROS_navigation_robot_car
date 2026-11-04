@@ -1,0 +1,7 @@
+<launch>
+   
+      <include file="$(find lianxi_slam)/launch/map_server.launch" />
+      <include file="$(find lianxi_slam)/launch/cmal.launch" />
+       <include file="$(find lianxi_slam)/launch/path.launch" />
+      <node pkg="rviz" type="rviz" name="rviz" />
+</launch>
