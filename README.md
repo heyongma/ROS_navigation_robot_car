@@ -1,0 +1,25 @@
+- 练习
+  - 练习仿真 lianxi_gazebo
+    - launch
+      - car_to.launch：启动入口，加载Gazebo场景、小车urdf模型、激光雷达、相机，发布TF、odom，整套仿真的基础启动文件
+    - scripts
+      - move_obstacle.py：动态障碍物控制脚本，向Gazebo障碍物发送位姿指令，生成移动障碍物，用于动态避障测试
+    - urdf
+      - camera.urdf.xacro：相机xacro模型，定义相机连杆、传感器参数、安装位置，仿真输出图像话题
+      - car_base.urdf.xacro：小车底盘本体模型，定义底盘连杆、车轮、惯性与碰撞属性，机器人基础骨架
+      - car_to.urdf.xacro：顶层汇总xacro，引入底盘、激光、相机模型，组装成完整机器人模型，供launch加载
+      - laser.urdf.xacro：激光雷达xacro模型，定义雷达安装位置、扫描参数，仿真输出/scan激光数据
+  - 练习SLAM lianxi_slam
+    - launch
+      - cmal.launch：AMCL定位启动文件，加载地图与定位参数，融合激光、里程计，输出小车全局位姿
+      - gamapping_slam.launch：GMapping建图启动文件，接收激光数据，在线构建栅格地图，用于环境建图
+      - map_saver.launch：地图保存节点，建图结束后导出pgm+yaml格式栅格地图
+      - map_server01.launch：静态地图服务，加载yaml地图文件，为导航提供地图数据
+      - move_base01.launch：move_base导航启动文件，采用DWA局部规划器，加载代价地图参数，接收目标点输出速度指令cmd_vel
+      - test_to01.launch：导航集成测试launch，串联仿真、定位、地图服务、move_base，一键执行导航测试
+    - map
+      - 03slam.yaml：栅格地图描述文件，配套pgm地图，记录分辨率、原点、占用阈值，给map_server加载
+    - src1
+      - obs_auto.cpp：障碍物处理C++源码，实现障碍物识别、跟踪相关逻辑，服务动态避障
+    - world
+      - box_house.world：Gazebo仿真场景文件，定义墙体、障碍物布局，搭建仿真环境
