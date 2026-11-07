@@ -19,7 +19,8 @@
       - map_saver.launch：地图保存节点，建图结束后导出pgm+yaml格式栅格地图
       - map_server01.launch：静态地图服务，加载yaml地图文件，为导航提供地图数据
       - move_base01.launch：move_base导航启动文件，采用DWA局部规划器，加载代价地图参数，接收目标点输出速度指令cmd_vel
-      - test_to01.launch：导航集成测试launch，串联仿真、定位、地图服务、move_base，一键执行导航测试
+      - test_to01.launch：导航集成测试launch，串联仿真、定位、地图服务、move_base，一键执行导航测试,要手动输入teb或dwa来决定导航方式
+      - move_base_teb.launch：move_base启动文件，加载TEB作为局部规划器，设置控制频率、坐标变换容差，加载代价地图、全局规划器、TEB规划器相关yaml参数，同时配置costmap_converter转换插件，用于将代价地图障碍物转为多边形，供TEB局部规划器进行动态避障计算。
     - map
       - 03slam.yaml：栅格地图描述文件，配套pgm地图，记录分辨率、原点、占用阈值，给map_server加载
     - src1
