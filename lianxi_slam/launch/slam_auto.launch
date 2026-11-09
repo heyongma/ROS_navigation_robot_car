@@ -1,7 +1,0 @@
-<launch>
-   <include file="$(find lianxi_slam)/launch/gamapping_slam.launch" />
-   <include file="$(find lianxi_slam)/launch/path.launch" />
-      
-
-
-</launch>

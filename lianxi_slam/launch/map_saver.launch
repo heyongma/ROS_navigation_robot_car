@@ -1,4 +1,0 @@
-<launch>
-    <arg name="filename" value="$(find lianxi_slam)/map/nav" />
-    <node name="map_save" pkg="map_server" type="map_saver" args="-f $(find lianxi_slam)/map/mycar_map" />
-</launch>

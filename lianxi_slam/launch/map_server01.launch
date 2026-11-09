@@ -1,4 +1,0 @@
-<!-- map_server.launch -->
-<launch>
-  <node name="map_server" pkg="map_server" type="map_server" args="$(find lianxi_slam)/map/03slam.yaml" output="screen"/>
-</launch>

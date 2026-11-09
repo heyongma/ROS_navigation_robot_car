@@ -1,6 +1,0 @@
-<launch>
-  <node name="map_server" pkg="map_server" type="map_server" args="$(find lianxi_slam)/map/01slam.yaml" output="screen"/>
-  <node name="amcl" pkg="amcl" type="amcl" output="screen">
-    <rosparam file="$(find lianxi_slam)/param/amcl.yaml" command="load"/>
-  </node>
-</launch>
