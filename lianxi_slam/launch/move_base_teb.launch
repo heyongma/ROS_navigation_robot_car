@@ -1,0 +1,18 @@
+<launch>
+<node pkg="move_base" type="move_base" respawn="false" name="move_base" output="screen">
+<!-- 指定TEB规划器 -->
+<param name="base_local_planner" value="teb_local_planner/TebLocalPlannerROS"/>
+<param name="controller_frequency" value="10.0"/>
+<param name="transform_tolerance" value="0.2"/>
+
+<!-- 新增 costmap_converter 插件参数 -->
+<param name="costmap_converter_plugin" value="costmap_converter::CostmapToPolygonsDBSMCCH"/>
+
+<rosparam file="$(find lianxi_slam)/param/costmap_common_params.yaml" command="load" ns="global_costmap"/>
+<rosparam file="$(find lianxi_slam)/param/costmap_common_params.yaml" command="load" ns="local_costmap"/>
+<rosparam file="$(find lianxi_slam)/param/global_costmap_params.yaml" command="load"/>
+<rosparam file="$(find lianxi_slam)/param/local_costmap_params.yaml" command="load"/>
+<rosparam file="$(find lianxi_slam)/param/global_planner.yaml" command="load" />
+<rosparam file="$(find lianxi_slam)/param/teb_local_planner_params.yaml" command="load"/>
+</node>
+</launch>

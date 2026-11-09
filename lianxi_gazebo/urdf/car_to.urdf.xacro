@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<robot name="car_to" xmlns:xacro="http://wiki.ros.org/xacro">
+  <xacro:include filename="$(find lianxi_gazebo)/urdf/car_base.urdf.xacro"/>
+  <xacro:include filename="$(find lianxi_gazebo)/urdf/camera.urdf.xacro"/>
+  <xacro:include filename="$(find lianxi_gazebo)/urdf/laser.urdf.xacro"/>
+
+
+</robot>

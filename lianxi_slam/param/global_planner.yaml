@@ -1,0 +1,3 @@
+interpolate_path: true
+path_distance_bias: 1.0
+goal_distance_bias: 100.0
