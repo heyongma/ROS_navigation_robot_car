@@ -1,4 +1,4 @@
-壹、项目主体
+壹、项目主体，最终项目使用到的
 - 练习
   - 练习仿真 lianxi_gazebo
     - launch
@@ -8,8 +8,11 @@
       - nav_mon.py   该节点订阅导航、定位相关话题，采集小车位姿、协方差与导航状态信息并写入CSV日志，用于导航实验的数据记录与效果分析。
       - teb_auto_compare.py：TEB 参数自动对照测试脚本，自动备份、切换 TEB 规划器 yaml 参数，一键启动 Gazebo 仿真、障碍物节点与导航系统，测试结束后恢复原始参数，支持批量开展多组参数对照实验，并将测试备注写入 CSV 文件，实现自动化调参对比。
       - way_point_many.py：多点航点巡航脚本，预先配置多个导航目标点位，通过 move_base 的 action 接口依次自动下发导航目标，完成一个航点后自动执行下一个，无需在 RViz 手动点击目标，实现机器人连续自主巡点。
-      - - `dtet.py`：激光雷达碰撞检测节点，读取`/scan`激光数据，设置距离阈值0.14m；当雷达检测距离小于阈值时，向`/collision_event`发布Bool碰撞信号，对接nav_monitor节点，用于记录碰撞事件。
-      - - `prefer_left_simple.py`：简易优先向左绕行决策节点，订阅激光雷达和导航状态，检测前方存在障碍物时，下发向左绕行的速度指令，优先选择左侧绕开障碍，作为轻量自定义避障策略，辅助导航规划器。
+      - dtet.py`：激光雷达碰撞检测节点，读取`/scan`激光数据，设置距离阈值0.14m；当雷达检测距离小于阈值时，向`/collision_event`发布Bool碰撞信号，对接nav_monitor节点，用于记录碰撞事件。
+      - prefer_left_simple.py`：简易优先向左绕行决策节点，订阅激光雷达和导航状态，检测前方存在障碍物时，下发向左绕行的速度指令，优先选择左侧绕开障碍，作为轻量自定义避障策略，辅助导航规划器。
+       -laser_obstacle_tracker.py：激光障碍物跟踪测试脚本，获取障碍物坐标
+  - src
+      -dwa_sim: C++ 手写简易 DWA（Dynamic Window Approach，动态窗口法）局部避障规划器
     - urdf
       - camera.urdf.xacro：相机xacro模型，定义相机连杆、传感器参数、安装位置，仿真输出图像话题
       - car_base.urdf.xacro：小车底盘本体模型，定义底盘连杆、车轮、惯性与碰撞属性，机器人基础骨架
@@ -27,7 +30,11 @@
     - map
       - 03slam.yaml：栅格地图描述文件，配套pgm地图，记录分辨率、原点、占用阈值，给map_server加载
     - src1
-      - obs_auto.cpp：障碍物处理C++源码，实现障碍物识别、跟踪相关逻辑，服务动态避障
+      - obs_auto.cpp：障碍物处理C++源码，实现障碍物识别、跟踪相关逻辑，服务动态避障，
+      - obs2_stop_and_decide_final.cpp：动态障碍物采样决策+纯跟踪绕行主逻辑，自己写的动态障碍物避开规则
+      - path_show.cpp：发布路径消息，用于RViz可视化轨迹。
+      - zidingyi_start.cpp：一键启动整套仿真导航避障相关节点。
+
      - param
        - `base_local_planner_params.yaml`：DWA原生局部规划器参数，设置速度上下限、加速度、路径跟踪权重、避障评价权重
        - `costmap_common_params.yaml`：代价地图公共参数，障碍物膨胀半径、传感器（激光）观测范围、障碍物判定阈值
@@ -38,5 +45,21 @@
        - `teb_local_planner_params.yaml`：TEB规划器参数，轨迹点数、时间分辨率、避障权重、速度约束、动态障碍物适配参数
     - world
       - box_house.world：Gazebo仿真场景文件，定义墙体、障碍物布局，搭建仿真环境，移动障碍物在这里生成，但不移动
+    - CMakeLists.txt编译
 贰、非项目主体，测试时用到，最终项目没有使用。
+   贰、非项目主体，测试时用到，最终项目没有使用。
+- lianxi_gazebo/scripts
+  - virtual_dynamic_obstacle.py：虚拟障碍物生成测试脚本，前期避障调试使用，最终废弃。
+- lianxi_slam/launch
+  - amcal01.launch：早期AMCL定位测试启动文件，参数不完善，替换为cmal.launch。
+  - map_server.launch：旧版地图服务启动文件，测试使用，最终改用map_server01.launch。
+  - path.launch：早期路径可视化测试launch，功能并入主程序，不再单独使用。
+  - slam_auto.launch：一键建图测试launch，仅建图阶段临时使用，导航流程不使用。
+  - test.launch：简易导航调试文件，用于临时功能验证，最终项目未启用。
+- lianxi_slam/map
+  - 01slam.pgm / 01slam.yaml、02slam.pgm / 02slam.yaml：前期测试旧地图，场景不完善，最终使用03slam地图。
+  - mycar_map.pgm / mycar_map.yaml：简易自建测试地图，仅练手，正式项目不采用。
+  - nav.yaml：早期临时导航参数汇总文件，参数拆分后不再使用。
+- lianxi_slam/param
+  - amcl.yaml：旧版AMCL参数文件，参数老旧，不再使用。
       
